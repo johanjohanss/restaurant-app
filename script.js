@@ -1,3 +1,4 @@
+//Menyobjekt
 let menu = [
     {name:"Margherita", ingredients:["Tomatsås", "Ost"], allergies:[""], price:65, category: "Pizzor klass 1"},
     {name:"Vesuvio", ingredients:["Tomatsås", "Ost", "Skinka"], allergies:[""], price:65, category: "Pizzor klass 1" },
@@ -11,6 +12,9 @@ let menu = [
 
     {name:"Coca-Cola 33 cl", ingredients:[], allergies:[], price:15, category: "Drycker" }, 
 ]
+
+//Varukorg-array
+let basket = [];
 
 let newOrderPage = document.getElementById("new-order-page");
 let startPage = document.getElementById("startpage");
@@ -28,7 +32,7 @@ window.addEventListener("load", function(){
     backArrow.addEventListener("click", showStartPage);
 
     let basketIcon = document.getElementById("basket-icon");
-    basketIcon.addEventListener("click", showCurrentOrderPage)
+    basketIcon.addEventListener("click", showCurrentOrderPage);
 
     let basketBackArrow = document.getElementById("basket-back-arrow");
     basketBackArrow.addEventListener("click", showNewOrderPage);
@@ -101,20 +105,21 @@ function buildMenu(){
             row.appendChild(allergiesDiv);
         }
 
-        
-
         let priceDiv = document.createElement("div");
         priceDiv.classList.add("col-10");
         let price = document.createElement("p");
         price.innerText = dish.price + "kr";
         priceDiv.appendChild(price);
 
-        let minusDiv = document.createElement("div");
-        minusDiv.classList.add("col-2");
-        minusDiv.innerHTML = '<svg class="symbol plus float-right" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/></svg>'
+        let plusDiv = document.createElement("div");
+        plusDiv.classList.add("col-2");
+        plusDiv.innerHTML = '<svg class="symbol plus float-right" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/></svg>'
+        plusDiv.addEventListener("click", function(){
+            addDishToBasket(dish);
+        })
 
         row.appendChild(priceDiv);
-        row.appendChild(minusDiv);
+        row.appendChild(plusDiv);
         menuDiv.appendChild(row);
     });
     /* 
@@ -140,10 +145,70 @@ function buildMenu(){
     */
 }
 
+function addDishToBasket(dish){
+    basket.push(
+        {
+            name: dish.name,
+            price: dish.price,   
+        }
+    );
+    console.log(basket);
+    updateBasket();
+}
+
+function updateBasket(){
+    let basketDiv = document.getElementById("basket");
+    basketDiv.innerHTML = "";
+    
+    let productAmount = 0;
+    let sum = 0;
+    let basketSum = document.getElementById("basketSum");
+    let newOrderAmount = document.getElementById("new-order-amount");
+
+    basket.forEach((dish, i) => {
+
+        //Uppdatera summa
+        sum += dish.price;
+        productAmount += 1;
+
+        //Bygg upp div med en maträtt
+        let row = document.createElement("div");
+        row.classList.add("row", "custom-box", "m-3", "box-shadow");
+
+        let titleDiv = document.createElement("div");
+        titleDiv.classList.add("col-12", "p-3");
+        let title = document.createElement("h5");
+        title.classList.add("font-weight-normal");
+        title.innerText = dish.name;
+        titleDiv.appendChild(title);
+
+        row.appendChild(titleDiv);
+
+        let priceDiv = document.createElement("div");
+        priceDiv.classList.add("col-8");
+        let price = document.createElement("p");
+        price.innerText = dish.price + "kr";
+        priceDiv.appendChild(price);
+
+        let plusDiv = document.createElement("div");
+        plusDiv.classList.add("col-4");
+        plusDiv.innerHTML = '<svg class="symbol minus float-right mx-1" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/></svg>';
+        plusDiv.innerHTML += '<svg class="symbol plus float-right mx-1" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/></svg>'
+        
+        row.appendChild(priceDiv);
+        row.appendChild(plusDiv);
+
+        basketDiv.appendChild(row);
+    });
+
+    basketSum.innerText = "Summa för " + productAmount + " produkter: " + sum + "kr";
+    newOrderAmount.innerText = "Nuvarande beställning("+sum+"kr)";
+}
+
 function showNewOrderPage(){
     console.log("showing new order page");
-    newOrderPage.classList.remove("d-none");
-    startPage.classList.add("d-none");
+    hidePage(startPage, currentOrderPage);
+    showPage(newOrderPage);
 }
 
 function showCurrentOrderPage(){
