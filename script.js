@@ -14,7 +14,9 @@ let menu = [
 
 let newOrderPage = document.getElementById("new-order-page");
 let startPage = document.getElementById("startpage");
+let currentOrderPage = document.getElementById("current-order-page");
 
+//Funktion som körs efter att sidan laddat klart
 window.addEventListener("load", function(){
 
     console.log("load");
@@ -25,10 +27,17 @@ window.addEventListener("load", function(){
     let backArrow = document.getElementById("back-arrow");
     backArrow.addEventListener("click", showStartPage);
 
+    let basketIcon = document.getElementById("basket-icon");
+    basketIcon.addEventListener("click", showCurrentOrderPage)
+
+    let basketBackArrow = document.getElementById("basket-back-arrow");
+    basketBackArrow.addEventListener("click", showNewOrderPage);
+
     buildMenu();
 
 });
 
+//Funktion som bygger upp menyn baserat på menu-objektet längst upp i filen
 function buildMenu(){
     let menuDiv = document.getElementById("menuDiv")
     let currentCategory = "Test";
@@ -135,6 +144,12 @@ function showNewOrderPage(){
     console.log("showing new order page");
     newOrderPage.classList.remove("d-none");
     startPage.classList.add("d-none");
+}
+
+function showCurrentOrderPage(){
+    console.log("showing current order page / checkout");
+    hidePage(newOrderPage, startPage);
+    showPage(currentOrderPage);
 }
 
 function showStartPage(){

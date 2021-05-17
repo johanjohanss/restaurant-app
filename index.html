@@ -117,9 +117,41 @@
                 <div>
                     <p class="text-center align-middle p-0 m-0">Nuvarande beställning(0kr)</p>
                 </div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="2rem" fill="currentColor" class="bi bi-bag-check-fill" viewBox="0 0 16 16">
+                <svg id="basket-icon" xmlns="http://www.w3.org/2000/svg" width="2rem" fill="currentColor" class="bi bi-bag-check-fill" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                 </svg>
+
+            </div>
+        </footer>
+    </div>
+
+
+
+    <!------------------------------------------->
+    <!-- CURRENT ORDER PAGE / CHECKOUT / KASSA -->
+
+    <div id="current-order-page" class="d-none">
+        <header class="bg-dark text-white">
+            <div class="p-3 d-flex justify-content-between align-items-center">
+                <svg id="basket-back-arrow" xmlns="http://www.w3.org/2000/svg" width="2rem" fill="currentColor" class="bi bi-arrow-left-square-fill" viewBox="0 0 16 16">
+                    <path d="M16 14a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12zm-4.5-6.5H5.707l2.147-2.146a.5.5 0 1 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708-.708L5.707 8.5H11.5a.5.5 0 0 0 0-1z"/>
+                </svg>
+                <h3 class="font-weight-normal p-0 m-0">Varukorg</h3>
+            </div>
+        </header>
+
+        <main id="basket" class="mt-1 pb-5 mb-5">
+            
+            <!-- Visa lista med produkter som valts - generera från javascript -->
+
+        </main>
+
+        <footer id="" class="p-4 px-5 position-fixed bg-primary text-white w-100">
+            <div class="row d-flex justify-content-between align-items-center" id="">
+
+                <div>
+                    <p class="text-center align-middle p-0 m-0">Slutför beställning</p>
+                </div>
 
             </div>
         </footer>
