@@ -3,9 +3,13 @@ let menu = [
     {name:"Vesuvio", ingredients:["Tomatsås", "Ost", "Skinka"], allergies:[""], price:65, category: "Pizzor klass 1" },
     {name:"Altono", ingredients:["Tomatsås", "Ost", "Tonfisk"], allergies:[""], price:65, category: "Pizzor klass 1" },  
 
-    {name:"Altono", ingredients:["Tomatsås", "Ost", "Skinka"], allergies:[""], price:80, category: "Pizzor klass 2" }, 
-    {name:"Altono", ingredients:["Tomatsås", "Ost", "Skinka", "Champinjoner"], allergies:[""], price:70, category: "Pizzor klass 2" }, 
-    {name:"Altono", ingredients:["Tomatsås", "Ost", "Tonfisk", "Räkor"], allergies:["Räkor"], price:70, category: "Pizzor klass 2" }, 
+    {name:"Calzone", ingredients:["Tomatsås", "Ost", "Skinka"], allergies:[""], price:80, category: "Pizzor klass 2" }, 
+    {name:"Capricciosa", ingredients:["Tomatsås", "Ost", "Skinka", "Champinjoner"], allergies:[""], price:70, category: "Pizzor klass 2" }, 
+    {name:"Tomaso", ingredients:["Tomatsås", "Ost", "Tonfisk", "Räkor"], allergies:["Räkor"], price:70, category: "Pizzor klass 2" }, 
+
+    {name:"Bearnaisesås 10 cl", ingredients:[], allergies:[], price:10, category: "Såser" }, 
+
+    {name:"Coca-Cola 33 cl", ingredients:[], allergies:[], price:15, category: "Drycker" }, 
 ]
 
 let newOrderPage = document.getElementById("new-order-page");
@@ -53,32 +57,42 @@ function buildMenu(){
         title.innerText = dish.name;
         titleDiv.appendChild(title);
 
-        let ingredientDiv = document.createElement("div");
-        ingredientDiv.classList.add("col-12");
-        let ingredients = document.createElement("p");
-        ingredientDiv.appendChild(ingredients);
+        row.appendChild(titleDiv);
+
+        //Om kategori är såser eller drycker begöver vi ej skriva ut ingredienser och allergier?
+        if(dish.category != "Såser" && dish.category != "Drycker"){
+            let ingredientDiv = document.createElement("div");
+            ingredientDiv.classList.add("col-12");
+            let ingredients = document.createElement("p");
+            ingredientDiv.appendChild(ingredients);
+            
+            dish.ingredients.forEach((ingredient, i) => { //i = index in array
+                if(i < dish.ingredients.length - 1){
+                    ingredients.innerText += ingredient + ", ";
+                }else{  
+                    ingredients.innerText += ingredient;
+                }
+            });
+
+            let allergiesDiv = document.createElement("div");
+            allergiesDiv.classList.add("col-12");
+            let allergies = document.createElement("p");
+            allergies.innerText += "Allergier: ";
+            allergiesDiv.appendChild(allergies);
+
+            dish.allergies.forEach((allergy, i) => {
+                if(i < dish.allergies.length - 1){
+                    allergies.innerText += allergy + ", ";
+                }else{  
+                    allergies.innerText += allergy;
+                }
+            });
+
+            row.appendChild(ingredientDiv);
+            row.appendChild(allergiesDiv);
+        }
+
         
-        dish.ingredients.forEach((ingredient, i) => { //i = index in array
-            if(i < dish.ingredients.length - 1){
-                ingredients.innerText += ingredient + ", ";
-            }else{  
-                ingredients.innerText += ingredient;
-            }
-        });
-
-        let allergiesDiv = document.createElement("div");
-        allergiesDiv.classList.add("col-12");
-        let allergies = document.createElement("p");
-        allergies.innerText += "Allergier: ";
-        allergiesDiv.appendChild(allergies);
-
-        dish.allergies.forEach((allergy, i) => {
-            if(i < dish.allergies.length - 1){
-                allergies.innerText += allergy + ", ";
-            }else{  
-                allergies.innerText += allergy;
-            }
-        });
 
         let priceDiv = document.createElement("div");
         priceDiv.classList.add("col-10");
@@ -90,12 +104,8 @@ function buildMenu(){
         minusDiv.classList.add("col-2");
         minusDiv.innerHTML = '<svg class="symbol plus float-right" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/></svg>'
 
-        row.appendChild(titleDiv);
-        row.appendChild(ingredientDiv);
-        row.appendChild(allergiesDiv);
         row.appendChild(priceDiv);
         row.appendChild(minusDiv);
-
         menuDiv.appendChild(row);
     });
     /* 
