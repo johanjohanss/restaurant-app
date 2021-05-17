@@ -1,1 +1,24 @@
-/* No CSS *//*# sourceMappingURL=style.css.map */
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+#start-footer {
+  position: fixed;
+  bottom: 0;
+}
+
+.custom-border {
+  border: 1.5px solid #313131;
+}
+
+.custom-border-lt {
+  border-top: 1.5px solid #313131;
+  border-left: 1.5px solid #313131;
+}
+
+.box-shadow {
+  -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.062);
+          box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.062);
+}
+/*# sourceMappingURL=style.css.map */

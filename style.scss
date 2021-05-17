@@ -1,0 +1,21 @@
+*{
+    box-sizing: border-box;
+}
+
+#start-footer{
+    position: fixed;
+    bottom: 0;
+}
+
+.custom-border{
+    border: 1.5px solid rgb(49, 49, 49);
+}
+
+.custom-border-lt{
+    border-top: 1.5px solid rgb(49, 49, 49);
+    border-left: 1.5px solid rgb(49, 49, 49);
+}
+
+.box-shadow{
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.062);
+}
