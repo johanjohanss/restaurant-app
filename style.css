@@ -1,6 +1,8 @@
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 html {
@@ -18,8 +20,14 @@ body {
   bottom: 0;
 }
 
-.custom-border {
-  border: 1.5px solid #313131;
+#new-order-footer {
+  position: fixed;
+  bottom: 0;
+}
+
+.custom-box {
+  background-color: #f1f1f1;
+  border-radius: 0.25rem;
 }
 
 .custom-border-lt {
@@ -30,11 +38,6 @@ body {
 .box-shadow {
   -webkit-box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.062);
           box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.062);
-}
-
-.symbol {
-  font-size: 1.5rem;
-  font-weight: bold;
 }
 
 /* PAGES */

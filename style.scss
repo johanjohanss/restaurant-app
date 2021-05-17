@@ -1,5 +1,7 @@
 *{
     box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 html{
     overflow-x: hidden;
@@ -14,9 +16,15 @@ body{
     position: fixed;
     bottom: 0;
 }
+#new-order-footer{
+    position: fixed;
+    bottom: 0;
+}
 
-.custom-border{
-    border: 1.5px solid rgb(49, 49, 49);
+.custom-box{
+    //border: 1.5px solid rgb(49, 49, 49);
+    background-color: rgb(241, 241, 241);
+    border-radius: 0.25rem;
 }
 
 .custom-border-lt{
@@ -26,10 +34,6 @@ body{
 
 .box-shadow{
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.062);
-}
-.symbol{
-    font-size: 1.5rem;
-    font-weight: bold;
 }
 
 
