@@ -13,6 +13,8 @@
   </head>
   <body>
 
+    <!--------------->
+    <!-- STARTPAGE -->
     <div id="startpage">
         <header class="bg-dark text-white">
             <div class="p-3">
@@ -23,7 +25,7 @@
         <div class="gradient-line"></div>
 
         <main class="mt-5">
-            <!--ORDER-->
+            <!--ORDER - generera genom javascript efter slutförd order -->
             <div class="row custom-box m-3 box-shadow pb-1">
                 <div class="col-12 p-3">
                     <h5 class="font-weight-normal">Beställning 1</h5>
@@ -64,7 +66,6 @@
 
     <!-------------------->
     <!-- NEW ORDER PAGE -->
-
     <div id="new-order-page" class="d-none">
         <header class="bg-dark text-white">
             <div class="p-3 d-flex justify-content-between align-items-center">
@@ -131,7 +132,6 @@
 
     <!------------------------------------------->
     <!-- CURRENT ORDER PAGE / CHECKOUT / KASSA -->
-
     <div id="current-order-page" class="d-none">
         <header class="bg-dark text-white">
             <div class="p-3 d-flex justify-content-between align-items-center">
@@ -144,18 +144,15 @@
 
         <main id="basket" class="mt-1 pb-5 mb-5">
             
-            <!-- Visa lista med produkter som valts - generera från javascript -->
+            <!-- Visar lista med produkter som valts - genereras från javascript -->
 
         </main>
-        <!--<div class="p-3">
-            <p id="basketSum">Summa: </p>
-        </div>-->
 
         <footer id="" class="p-4 px-5 position-fixed bg-primary text-white w-100 fixed-bottom">
             <div class="row d-flex justify-content-between align-items-center" id="">
 
                 <div class="col-12">
-                    <p id="basketSum" class="text-center align-middle p-0 m-0">Summa: </p>
+                    <p id="basketSum" class="text-center align-middle p-0 m-0">Summa: </p> <!--  Visar summa -->
                     <p class="text-center align-middle p-0 m-0">Slutför beställning</p>
                 </div>
 

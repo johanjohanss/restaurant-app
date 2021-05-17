@@ -1,4 +1,4 @@
-//Menyobjekt
+//Menyarray - allt som läggs till genereras automatiskt till html i buildMenu funktionen
 let menu = [
     {name:"Margherita", ingredients:["Tomatsås", "Ost"], allergies:[""], price:65, category: "Pizzor klass 1"},
     {name:"Vesuvio", ingredients:["Tomatsås", "Ost", "Skinka"], allergies:[""], price:65, category: "Pizzor klass 1" },
@@ -8,14 +8,18 @@ let menu = [
     {name:"Capricciosa", ingredients:["Tomatsås", "Ost", "Skinka", "Champinjoner"], allergies:[""], price:70, category: "Pizzor klass 2" }, 
     {name:"Tomaso", ingredients:["Tomatsås", "Ost", "Tonfisk", "Räkor"], allergies:["Räkor"], price:70, category: "Pizzor klass 2" }, 
 
+    {name:"Bravo", ingredients:["Tomatsås", "Ost", "Skinka", "Bacon", "Lök", "Ägg"], allergies:["Ägg"], price:75, category: "Pizzor klass 3" }, 
+    {name:"Princessa", ingredients:["Tomatsås", "Ost", "Skinka", "Räkor", "Champinjoner"], allergies:["Räkor"], price:75, category: "Pizzor klass 3" }, 
+
     {name:"Bearnaisesås 10 cl", ingredients:[], allergies:[], price:10, category: "Såser" }, 
 
     {name:"Coca-Cola 33 cl", ingredients:[], allergies:[], price:15, category: "Drycker" }, 
 ]
 
-//Varukorg-array
+//Varukorg-array - lagrar alla produkter som ligger i varukorgen
 let basket = [];
 
+//Hämtar in de olika sidorna från html
 let newOrderPage = document.getElementById("new-order-page");
 let startPage = document.getElementById("startpage");
 let currentOrderPage = document.getElementById("current-order-page");
@@ -25,6 +29,7 @@ window.addEventListener("load", function(){
 
     console.log("load");
 
+    //Event listeners för de olika knapparna för navigation
     let newOrderButton = document.getElementById("new-order-button");
     newOrderButton.addEventListener("click", showNewOrderPage);
 
@@ -44,11 +49,13 @@ window.addEventListener("load", function(){
 //Funktion som bygger upp menyn baserat på menu-objektet längst upp i filen
 function buildMenu(){
     let menuDiv = document.getElementById("menuDiv")
-    let currentCategory = "Test";
+    let currentCategory = "";
     
+    //För varje maträtt i menu arrayen
     menu.forEach((dish) => {
-        console.log(dish.name);
+        //console.log(dish.name);
 
+        //Fixar rubriker för varje kategori och ser till att varje kategori bara skrivs en gång
         if(currentCategory != dish.category){
             currentCategory = dish.category;
             let categoryDiv = document.createElement("div");
@@ -60,6 +67,7 @@ function buildMenu(){
             menuDiv.appendChild(categoryDiv);
         }
 
+        //Bygger upp en div med innehåll om varje maträtt
         let row = document.createElement("div");
         row.classList.add("row", "custom-box", "m-3", "box-shadow");
 
@@ -122,6 +130,8 @@ function buildMenu(){
         row.appendChild(plusDiv);
         menuDiv.appendChild(row);
     });
+
+    //Koden ovan byggs upp efter denna struktur:
     /* 
             <div class="row custom-box m-3 box-shadow">
                 <div class="col-12 p-3">
@@ -145,6 +155,7 @@ function buildMenu(){
     */
 }
 
+//Funktion som lägger till en maträtt till varukorgen
 function addDishToBasket(dish){
     basket.push(
         {
@@ -156,15 +167,17 @@ function addDishToBasket(dish){
     updateBasket();
 }
 
+//Funktion som uppdaterar varukorgen
 function updateBasket(){
     let basketDiv = document.getElementById("basket");
     basketDiv.innerHTML = "";
     
-    let productAmount = 0;
-    let sum = 0;
-    let basketSum = document.getElementById("basketSum");
-    let newOrderAmount = document.getElementById("new-order-amount");
+    let productAmount = 0; //Totalt antal produkter i varukorgen
+    let sum = 0; //Summa av priset för alla produkter i varukorgen
+    let basketSum = document.getElementById("basketSum"); //Textelement som ska uppdateras med nytt värde
+    let newOrderAmount = document.getElementById("new-order-amount"); //Textelement som ska uppdateras med nytt värde
 
+    //För varje maträtt i varukorgen
     basket.forEach((dish, i) => {
 
         //Uppdatera summa
@@ -201,33 +214,38 @@ function updateBasket(){
         basketDiv.appendChild(row);
     });
 
+    //Uppdaterar summa och antal produkter
     basketSum.innerText = "Summa för " + productAmount + " produkter: " + sum + "kr";
     newOrderAmount.innerText = "Nuvarande beställning("+sum+"kr)";
 }
 
+//Visar sida för att skapa en ny order
 function showNewOrderPage(){
     console.log("showing new order page");
     hidePage(startPage, currentOrderPage);
     showPage(newOrderPage);
 }
 
+//Visa sida för kassa 
 function showCurrentOrderPage(){
     console.log("showing current order page / checkout");
     hidePage(newOrderPage, startPage);
     showPage(currentOrderPage);
 }
 
+//Visar startsida
 function showStartPage(){
     console.log("showing startpage");
     hidePage(newOrderPage);
     showPage(startPage);
 }
 
-
+//Visar sidan som skickas in
 function showPage(page){
     page.classList.remove("d-none");
 }
 
+//Döljer sidor som skickas in
 //Skicka in minst en sida att dölja men kan också skicka in fler
 //Om inga fler sidor skickas in sätts de till null
 function hidePage(page1, page2, page3) {
