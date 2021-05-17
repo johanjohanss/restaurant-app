@@ -1,7 +1,7 @@
 let menu = [
-    {name:"Margherita", ingredients:["Tomatsås", "Ost"], allergies:[""], price:65},
-    {name:"Vesuvio", ingredients:["Tomatsås", "Ost", "Skinka"], allergies:[""], price:65},
-    {name:"Altono", ingredients:["Tomatsås", "Ost", "Tonfisk"], allergies:[""], price:65},  
+    {name:"Margherita", ingredients:["Tomatsås", "Ost"], allergies:[""], price:65, category: "Kategori 1"},
+    {name:"Vesuvio", ingredients:["Tomatsås", "Ost", "Skinka"], allergies:[""], price:65, category: "Kategori 1" },
+    {name:"Altono", ingredients:["Tomatsås", "Ost", "Tonfisk"], allergies:[""], price:65, category: "Kategori 1" },  
 ]
 
 let newOrderPage = document.getElementById("new-order-page");
@@ -23,9 +23,20 @@ window.addEventListener("load", function(){
 
 function buildMenu(){
     let menuDiv = document.getElementById("menuDiv")
+    let currentCategory = "Test";
     
     menu.forEach((dish) => {
         console.log(dish.name);
+
+        if(currentCategory != dish.category){
+            currentCategory = dish.category;
+            let categoryDiv = document.createElement("div");
+            categoryDiv.classList.add("col-12", "p-3");
+            let categoryTitle = document.createElement("h4");
+            categoryTitle.innerText = dish.category;
+            categoryDiv.appendChild(categoryTitle);
+            menuDiv.appendChild(categoryDiv);
+        }
 
         let row = document.createElement("div");
         row.classList.add("row", "custom-box", "m-3", "box-shadow");
