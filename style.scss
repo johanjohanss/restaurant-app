@@ -1,6 +1,14 @@
 *{
     box-sizing: border-box;
 }
+html{
+    overflow-x: hidden;
+}
+body{
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
 
 #start-footer{
     position: fixed;
@@ -19,3 +27,10 @@
 .box-shadow{
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.062);
 }
+.symbol{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+
+/* PAGES */
