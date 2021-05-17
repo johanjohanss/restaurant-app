@@ -1,7 +1,11 @@
 let menu = [
-    {name:"Margherita", ingredients:["Tomatsås", "Ost"], allergies:[""], price:65, category: "Kategori 1"},
-    {name:"Vesuvio", ingredients:["Tomatsås", "Ost", "Skinka"], allergies:[""], price:65, category: "Kategori 1" },
-    {name:"Altono", ingredients:["Tomatsås", "Ost", "Tonfisk"], allergies:[""], price:65, category: "Kategori 1" },  
+    {name:"Margherita", ingredients:["Tomatsås", "Ost"], allergies:[""], price:65, category: "Pizzor klass 1"},
+    {name:"Vesuvio", ingredients:["Tomatsås", "Ost", "Skinka"], allergies:[""], price:65, category: "Pizzor klass 1" },
+    {name:"Altono", ingredients:["Tomatsås", "Ost", "Tonfisk"], allergies:[""], price:65, category: "Pizzor klass 1" },  
+
+    {name:"Altono", ingredients:["Tomatsås", "Ost", "Skinka"], allergies:[""], price:80, category: "Pizzor klass 2" }, 
+    {name:"Altono", ingredients:["Tomatsås", "Ost", "Skinka", "Champinjoner"], allergies:[""], price:70, category: "Pizzor klass 2" }, 
+    {name:"Altono", ingredients:["Tomatsås", "Ost", "Tonfisk", "Räkor"], allergies:["Räkor"], price:70, category: "Pizzor klass 2" }, 
 ]
 
 let newOrderPage = document.getElementById("new-order-page");
@@ -32,6 +36,7 @@ function buildMenu(){
             currentCategory = dish.category;
             let categoryDiv = document.createElement("div");
             categoryDiv.classList.add("col-12", "p-3");
+            categoryDiv.setAttribute("id", currentCategory.replace(/\s/g, "").toLowerCase()); //Sätter id till kategorinamn utan whitespace
             let categoryTitle = document.createElement("h4");
             categoryTitle.innerText = dish.category;
             categoryDiv.appendChild(categoryTitle);
