@@ -1,3 +1,7 @@
+//Johan Johansson och Jonathan Hultén
+
+"use strict";
+
 //Menyarray - allt som läggs till genereras automatiskt till html i buildMenu funktionen
 let menu = [
     {name:"Margherita", ingredients:["Tomatsås", "Ost"], allergies:[""], price:65, category: "Pizzor klass 1"},
@@ -67,7 +71,7 @@ function finishOrder(){
     updateOrders();
     showStartPage();
 
-    //Visa notis att order lagts till
+    //Visa notis att order lagts till - gör en funktion för det
     
 }
 
