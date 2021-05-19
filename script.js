@@ -19,6 +19,9 @@ let menu = [
 //Varukorg-array - lagrar alla produkter som ligger i varukorgen
 let basket = [];
 
+//Order array - lagrar alla ordrar
+let orders = [];
+
 //Hämtar in de olika sidorna från html
 let newOrderPage = document.getElementById("new-order-page");
 let startPage = document.getElementById("startpage");
@@ -42,9 +45,95 @@ window.addEventListener("load", function(){
     let basketBackArrow = document.getElementById("basket-back-arrow");
     basketBackArrow.addEventListener("click", showNewOrderPage);
 
+    let finishOrderButton = document.getElementById("finish-order");
+    finishOrderButton.addEventListener("click", finishOrder);
+
     buildMenu();
 
 });
+
+function finishOrder(){
+
+    //Skapa upp en order som innehåller alla produkter som just nu ligger i varukorgen
+    let currentOrder = basket;
+
+    //Lägg till orders i order array
+    orders.push(currentOrder);
+    console.log(orders);
+
+    //Rensa varukorgen
+    basket = [];
+
+    updateOrders();
+    showStartPage();
+
+    //Visa notis att order lagts till
+    
+}
+
+function updateOrders(){
+
+    let orderDisplay = document.getElementById("orders");
+    orderDisplay.innerHTML = "";
+
+    orders.forEach((order, i) => {
+
+        let orderSum = 0;
+        let orderName = "Beställning " + (i+1);
+
+        order.forEach((item, i) => {
+            orderSum += item.price;
+        });
+
+        
+        let row = document.createElement("div");
+        row.classList.add("row", "custom-box", "m-3", "box-shadow", "pb-1");
+
+        let titleDiv = document.createElement("div");
+        titleDiv.classList.add("col-12", "p-3");
+        let title = document.createElement("h5");
+        title.classList.add("font-weight-normal");
+        title.innerText = orderName;
+        titleDiv.appendChild(title);
+
+        let sumDiv = document.createElement("div");
+        sumDiv.classList.add("col-8");
+        let sum = document.createElement("p");
+        sum.innerText = orderSum;
+        sumDiv.appendChild(sum)
+
+        let symbolDiv = document.createElement("div");
+        symbolDiv.classList.add("col-4");
+        symbolDiv.innerHTML = '<svg class="symbol minus float-right" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/></svg>'
+        symbolDiv.innerHTML += '<svg class="symbol info float-right mr-2" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-info-square-fill" viewBox="0 0 16 16"><path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.93 4.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>'
+
+        row.appendChild(titleDiv);
+        row.appendChild(sumDiv);
+        row.appendChild(symbolDiv);
+        orderDisplay.appendChild(row);
+    });
+}
+
+//Struktur för order
+/*
+    <div class="row custom-box m-3 box-shadow pb-1">
+        <div class="col-12 p-3">
+            <h5 class="font-weight-normal">Beställning 1</h5>
+        </div>
+        <div class="col-8">
+            <p>Summa: 250kr</p>
+        </div>
+
+        <div class="col-4">
+            <svg class="symbol minus float-right" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16">
+                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/>
+            </svg>
+            <svg class="symbol info float-right mr-2" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-info-square-fill" viewBox="0 0 16 16">
+                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.93 4.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+            </svg>
+        </div>
+    </div>
+*/
 
 //Funktion som bygger upp menyn baserat på menu-objektet längst upp i filen
 function buildMenu(){
@@ -236,7 +325,7 @@ function showCurrentOrderPage(){
 //Visar startsida
 function showStartPage(){
     console.log("showing startpage");
-    hidePage(newOrderPage);
+    hidePage(newOrderPage, currentOrderPage);
     showPage(startPage);
 }
 
