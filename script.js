@@ -30,6 +30,7 @@ let orders = [];
 let newOrderPage = document.getElementById("new-order-page");
 let startPage = document.getElementById("startpage");
 let currentOrderPage = document.getElementById("current-order-page");
+let orderInformationPage = document.getElementById("order-info-page");
 
 //Funktion som körs efter att sidan laddat klart
 window.addEventListener("load", function(){
@@ -156,6 +157,59 @@ function updateOrders(){
 function showOrderInformation(order){
     console.log("show order information");
     console.log(order);
+
+    let orderInfoDiv = document.getElementById("order-info-display");
+    orderInfoDiv.innerHTML = "";
+    
+    let productAmount = 0; //Totalt antal produkter i order
+    let sum = 0; //Summa av priset för alla produkter i order
+
+    //För varje maträtt i varukorgen
+    order.forEach(dish => {
+
+        //Uppdatera summa
+        sum += dish.price;
+        productAmount += 1;
+
+        //Bygg upp div med en maträtt
+        let row = document.createElement("div");
+        row.classList.add("row", "custom-box", "m-3", "box-shadow");
+
+        let titleDiv = document.createElement("div");
+        titleDiv.classList.add("col-12", "p-3");
+        let title = document.createElement("h5");
+        title.classList.add("font-weight-normal");
+        title.innerText = dish.name;
+        titleDiv.appendChild(title);
+
+        row.appendChild(titleDiv);
+
+        let priceDiv = document.createElement("div");
+        priceDiv.classList.add("col-8");
+        let price = document.createElement("p");
+        price.innerText = dish.price + "kr";
+        priceDiv.appendChild(price);
+        /*
+        let plusDiv = document.createElement("div");
+        plusDiv.classList.add("col-4");
+        plusDiv.innerHTML = '<svg class="symbol minus float-right mx-1" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/></svg>';
+        plusDiv.innerHTML += '<svg class="symbol plus float-right mx-1" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/></svg>'
+        */
+        row.appendChild(priceDiv);
+        //row.appendChild(plusDiv);
+
+        orderInfoDiv.appendChild(row);
+
+        
+
+    });
+
+    //Varför fungerar inte detta
+    /*let orderInfoSum = document.getElementById("order-info-sum");
+    console.log(orderInfoSum);
+    orderInfoSum.innerHTML = "Ordersumma: " + sum;*/
+
+    showOrderInfoPage();
 }
 
 //Funktion som bygger upp menyn baserat på menu-objektet längst upp i filen
@@ -343,6 +397,12 @@ function showCurrentOrderPage(){
     console.log("showing current order page / checkout");
     hidePage(newOrderPage, startPage);
     showPage(currentOrderPage);
+}
+
+function showOrderInfoPage(){
+    console.log("showing order info page");
+    hidePage(startPage);
+    showPage(orderInformationPage);
 }
 
 //Visar startsida
