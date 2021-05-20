@@ -73,6 +73,9 @@ function finishOrder(){
 
     //Visa notis att order lagts till - gör en funktion för det
     
+    //Nollställ order amount
+    let newOrderAmount = document.getElementById("new-order-amount");
+    newOrderAmount.innerText = "Nuvarande beställning(0kr)";
 }
 
 function updateOrders(){
