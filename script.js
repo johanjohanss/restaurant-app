@@ -27,6 +27,13 @@ let basket = [];
 let orders = [];
 var currentOrder;
 
+//Specialbeställning
+var specialOrderBox = document.getElementById("special-order-text");
+specialOrderBox.addEventListener("input", registerSpecialOrder);
+let specialOrder = {
+    specialOrder: ""
+};
+
 //Hämtar in de olika sidorna från html
 const newOrderPage = document.getElementById("new-order-page");
 const startPage = document.getElementById("startpage");
@@ -78,11 +85,16 @@ function removeOrder(){
     showStartPage();
 }
 
+//Gör klart en order ochlägger till order i orders array
 function finishOrder(){
-
 
     //Kolla så att det finns något i varukorgen
     if(basket.length != 0){
+
+        //Om en specialbeställning skrivits in läggs den till i basket
+        if(specialOrder.specialOrder != ""){
+            basket.push(specialOrder);
+        }
         //Skapa upp en order som innehåller alla produkter som just nu ligger i varukorgen
         let currentOrder = basket;
 
@@ -130,7 +142,9 @@ function updateOrders(){
         let orderName = "Beställning " + (i+1);
 
         order.forEach((item, i) => {
-            orderSum += item.price;
+            if(item.price != null){
+                orderSum += item.price;
+            }
         });
         
         let row = document.createElement("div");
@@ -209,36 +223,48 @@ function showOrderInformation(order){
     //För varje maträtt i varukorgen
     order.forEach(dish => {
 
-        //Uppdatera summa
-        sum += dish.price;
-        productAmount += 1;
-
-        //Bygg upp div med en maträtt
+        //Bygg upp div
         let row = document.createElement("div");
         row.classList.add("row", "custom-box", "m-3", "box-shadow");
 
-        let titleDiv = document.createElement("div");
-        titleDiv.classList.add("col-12", "p-3");
-        let title = document.createElement("h5");
-        title.classList.add("font-weight-normal");
-        title.innerText = dish.name;
-        titleDiv.appendChild(title);
+        //Uppdatera summa - kollar så att inte det är specialOrder
+        if(dish.price != null){
+            sum += dish.price;
+            productAmount += 1;
 
-        row.appendChild(titleDiv);
+            let titleDiv = document.createElement("div");
+            titleDiv.classList.add("col-12", "p-3");
+            let title = document.createElement("h5");
+            title.classList.add("font-weight-normal");
+            title.innerText = dish.name;
+            titleDiv.appendChild(title);
 
-        let priceDiv = document.createElement("div");
-        priceDiv.classList.add("col-8");
-        let price = document.createElement("p");
-        price.innerText = dish.price + "kr";
-        priceDiv.appendChild(price);
-        /*
-        let plusDiv = document.createElement("div");
-        plusDiv.classList.add("col-4");
-        plusDiv.innerHTML = '<svg class="symbol minus float-right mx-1" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/></svg>';
-        plusDiv.innerHTML += '<svg class="symbol plus float-right mx-1" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/></svg>'
-        */
-        row.appendChild(priceDiv);
-        //row.appendChild(plusDiv);
+            row.appendChild(titleDiv);
+
+            let priceDiv = document.createElement("div");
+            priceDiv.classList.add("col-8");
+            let price = document.createElement("p");
+            price.innerText = dish.price + "kr";
+            priceDiv.appendChild(price);
+    
+            row.appendChild(priceDiv);
+        }else{
+            let titleDiv = document.createElement("div");
+            titleDiv.classList.add("col-12", "p-3");
+            let title = document.createElement("h5");
+            title.classList.add("font-weight-normal");
+            title.innerText = "Specialbeställing";
+            titleDiv.appendChild(title);
+
+            row.appendChild(titleDiv);
+
+            let textDiv = document.createElement("div");
+            textDiv.classList.add("col-8");
+            let text = document.createElement("p");
+            text.innerText = dish.specialOrder;
+            textDiv.appendChild(text);
+            row.appendChild(textDiv);
+        }
 
         orderInfoDiv.appendChild(row);
 
@@ -370,6 +396,12 @@ function addDishToBasket(dish){
     console.log(basket);
     updateBasket();
     hideBasketError();
+}
+
+function registerSpecialOrder(){
+    specialOrder = {
+        specialOrder: specialOrderBox.value
+    }
 }
 
 //Funktion som uppdaterar varukorgen
