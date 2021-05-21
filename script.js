@@ -103,7 +103,7 @@ function finishOrder(){
         let newOrderAmount = document.getElementById("new-order-amount");
         newOrderAmount.innerText = "Nuvarande beställning(0kr)";
     }else{
-        basketError("Lägg till varor i order för att beställa");
+        basketError("Lägg till varor i order för att lägga beställning");
     }
 
 }
@@ -112,6 +112,11 @@ function basketError(s){
     let basketErrorText = document.getElementById("basketErrorText");
     basketErrorText.classList.remove("d-none");
     basketErrorText.innerText = s;
+}
+function hideBasketError(){
+    let basketErrorText = document.getElementById("basketErrorText");
+    basketErrorText.classList.add("d-none");
+    basketErrorText.innerText = "";
 }
 
 function updateOrders(){
@@ -364,6 +369,7 @@ function addDishToBasket(dish){
     );
     console.log(basket);
     updateBasket();
+    hideBasketError();
 }
 
 //Funktion som uppdaterar varukorgen
