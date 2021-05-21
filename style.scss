@@ -28,6 +28,11 @@ footer{
     left:0;
     width: 100%;
 }
+#removeOrderButton{
+    &:hover{
+        cursor: pointer;
+    }
+}
 .fixed-bottom{
     position: fixed;
     bottom: 0;
@@ -73,6 +78,9 @@ footer{
 #no-orders{
     color: rgb(32, 32, 32);
     font-size: 1.1rem;
+}
+#orderInfoSum{
+    font-size: 1.2rem;
 }
 
 /* ERROR MESSAGE */

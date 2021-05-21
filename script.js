@@ -25,6 +25,7 @@ let basket = [];
 
 //Order array - lagrar alla ordrar
 let orders = [];
+var currentOrder;
 
 //Hämtar in de olika sidorna från html
 const newOrderPage = document.getElementById("new-order-page");
@@ -58,9 +59,24 @@ window.addEventListener("load", function(){
     let infoBackArrow = document.getElementById("back-from-info");
     infoBackArrow.addEventListener("click", showStartPage);
 
+    let removeOrderButton = document.getElementById("removeOrderButton");
+    removeOrderButton.addEventListener("click", removeOrder);
+
     buildMenu();
 
 });
+
+function removeOrder(){
+    console.log("remove order");
+    //Kollar igenom orders array och tar bort element som matchar currentOrder
+    for( var i = 0; i < orders.length; i++){ 
+        if ( orders[i] === currentOrder) { 
+            orders.splice(i, 1); 
+        }
+    }
+    updateOrders();
+    showStartPage();
+}
 
 function finishOrder(){
 
@@ -111,7 +127,6 @@ function updateOrders(){
         order.forEach((item, i) => {
             orderSum += item.price;
         });
-
         
         let row = document.createElement("div");
         row.classList.add("row", "custom-box", "m-3", "box-shadow", "pb-1");
@@ -176,6 +191,9 @@ function updateOrders(){
 function showOrderInformation(order){
     console.log("show order information");
     console.log(order);
+
+    //Sätter currentOrder till order
+    currentOrder = order;
 
     let orderInfoDiv = document.getElementById("order-info-display");
     orderInfoDiv.innerHTML = "";
