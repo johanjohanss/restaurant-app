@@ -53,6 +53,9 @@ window.addEventListener("load", function(){
     let finishOrderButton = document.getElementById("finish-order");
     finishOrderButton.addEventListener("click", finishOrder);
 
+    let infoBackArrow = document.getElementById("back-from-info");
+    infoBackArrow.addEventListener("click", showStartPage);
+
     buildMenu();
 
 });
@@ -71,6 +74,7 @@ function finishOrder(){
 
     updateOrders();
     showStartPage();
+    clearBasket();
 
     //Visa notis att order lagts till - gör en funktion för det
     
@@ -335,9 +339,10 @@ function addDishToBasket(dish){
 
 //Funktion som uppdaterar varukorgen
 function updateBasket(){
-    let basketDiv = document.getElementById("basket");
-    basketDiv.innerHTML = "";
+    clearBasket();
     
+    let basketDiv = document.getElementById("basket");
+
     let productAmount = 0; //Totalt antal produkter i varukorgen
     let sum = 0; //Summa av priset för alla produkter i varukorgen
     let basketSum = document.getElementById("basketSum"); //Textelement som ska uppdateras med nytt värde
@@ -385,6 +390,14 @@ function updateBasket(){
     newOrderAmount.innerText = "Nuvarande beställning("+sum+"kr)";
 }
 
+function clearBasket(){
+    let basketDiv = document.getElementById("basket");
+    basketDiv.innerHTML = "";
+
+    let basketSum = document.getElementById("basketSum");
+    basketSum.innerText = "Summa: 0";
+}
+
 //Visar sida för att skapa en ny order
 function showNewOrderPage(){
     console.log("showing new order page");
@@ -408,7 +421,7 @@ function showOrderInfoPage(){
 //Visar startsida
 function showStartPage(){
     console.log("showing startpage");
-    hidePage(newOrderPage, currentOrderPage);
+    hidePage(newOrderPage, currentOrderPage, orderInformationPage);
     showPage(startPage);
 }
 
