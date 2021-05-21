@@ -3,7 +3,7 @@
 "use strict";
 
 //Menyarray - allt som läggs till genereras automatiskt till html i buildMenu funktionen
-let menu = [
+const menu = [
     {name:"Margherita", ingredients:["Tomatsås", "Ost"], allergies:[""], price:65, category: "Pizzor klass 1"},
     {name:"Vesuvio", ingredients:["Tomatsås", "Ost", "Skinka"], allergies:[""], price:65, category: "Pizzor klass 1" },
     {name:"Altono", ingredients:["Tomatsås", "Ost", "Tonfisk"], allergies:[""], price:65, category: "Pizzor klass 1" },  
@@ -27,10 +27,12 @@ let basket = [];
 let orders = [];
 
 //Hämtar in de olika sidorna från html
-let newOrderPage = document.getElementById("new-order-page");
-let startPage = document.getElementById("startpage");
-let currentOrderPage = document.getElementById("current-order-page");
-let orderInformationPage = document.getElementById("order-info-page");
+const newOrderPage = document.getElementById("new-order-page");
+const startPage = document.getElementById("startpage");
+const currentOrderPage = document.getElementById("current-order-page");
+const orderInformationPage = document.getElementById("order-info-page");
+
+const orderInfoSum = document.getElementById("orderInfoSum");
 
 //Funktion som körs efter att sidan laddat klart
 window.addEventListener("load", function(){
@@ -217,16 +219,12 @@ function showOrderInformation(order){
 
         orderInfoDiv.appendChild(row);
 
-        
-
     });
 
-    //Varför fungerar inte detta
-    /*let orderInfoSum = document.getElementById("order-info-sum");
-    console.log(orderInfoSum);
-    orderInfoSum.innerHTML = "Ordersumma: " + sum;*/
-
     showOrderInfoPage();
+
+    orderInfoSum.innerText = "Ordersumma: " + sum;
+    
 }
 
 //Funktion som bygger upp menyn baserat på menu-objektet längst upp i filen
