@@ -85,13 +85,14 @@ function finishOrder(){
         let newOrderAmount = document.getElementById("new-order-amount");
         newOrderAmount.innerText = "Nuvarande beställning(0kr)";
     }else{
-        basketError("Lägg till varor i order");
+        basketError("Lägg till varor i order för att beställa");
     }
 
 }
 
 function basketError(s){
     let basketErrorText = document.getElementById("basketErrorText");
+    basketErrorText.classList.remove("d-none");
     basketErrorText.innerText = s;
 }
 

@@ -74,3 +74,17 @@ footer{
     color: rgb(32, 32, 32);
     font-size: 1.1rem;
 }
+
+/* ERROR MESSAGE */
+.errorMsg{
+    background-color: rgba(255, 187, 97, 0.767);
+    color: rgb(29, 29, 29);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    font-size: 1.1rem;
+    margin: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
