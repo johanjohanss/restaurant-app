@@ -62,25 +62,37 @@ window.addEventListener("load", function(){
 
 function finishOrder(){
 
-    //Skapa upp en order som innehåller alla produkter som just nu ligger i varukorgen
-    let currentOrder = basket;
 
-    //Lägg till orders i order array
-    orders.push(currentOrder);
-    console.log(orders);
+    //Kolla så att det finns något i varukorgen
+    if(basket.length != 0){
+        //Skapa upp en order som innehåller alla produkter som just nu ligger i varukorgen
+        let currentOrder = basket;
 
-    //Rensa varukorgen
-    basket = [];
+        //Lägg till orders i order array
+        orders.push(currentOrder);
+        console.log(orders);
 
-    updateOrders();
-    showStartPage();
-    clearBasket();
+        //Rensa varukorgen
+        basket = [];
 
-    //Visa notis att order lagts till - gör en funktion för det
-    
-    //Nollställ order amount
-    let newOrderAmount = document.getElementById("new-order-amount");
-    newOrderAmount.innerText = "Nuvarande beställning(0kr)";
+        updateOrders();
+        showStartPage();
+        clearBasket();
+
+        //Visa notis att order lagts till - gör en funktion för det
+        
+        //Nollställ order amount
+        let newOrderAmount = document.getElementById("new-order-amount");
+        newOrderAmount.innerText = "Nuvarande beställning(0kr)";
+    }else{
+        basketError("Lägg till varor i order");
+    }
+
+}
+
+function basketError(s){
+    let basketErrorText = document.getElementById("basketErrorText");
+    basketErrorText.innerText = s;
 }
 
 function updateOrders(){
