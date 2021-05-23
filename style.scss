@@ -58,6 +58,11 @@ footer{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    justify-content: flex-end;
+}
+
+.basket-reset{
+    //border-bottom: 2px solid rgb(185, 185, 185);
 }
 
 .custom-border-lt{

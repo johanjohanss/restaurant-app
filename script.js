@@ -101,6 +101,12 @@ window.addEventListener("load", function(){
     let removeOrderButton = document.getElementById("removeOrderButton");
     removeOrderButton.addEventListener("click", removeOrder);
 
+    let basketResetButton = document.getElementById("basket-reset-button");
+    basketResetButton.addEventListener("click", function(){
+        clearBasket();
+        basket = [];
+    });
+
     buildMenu();
 
 });
@@ -119,6 +125,10 @@ function removeOrder(){
 
 function resetSpecialOrderText(){
     specialOrderBox.value = "";
+}
+function resetNewOrderAmount(){
+    let newOrderAmount = document.getElementById("new-order-amount");
+    newOrderAmount.innerText = "Nuvarande beställning(0kr)";
 }
 
 //Gör klart en order ochlägger till order i orders array
@@ -146,11 +156,8 @@ function finishOrder(){
         clearBasket();
         resetSpecialOrderText();
 
-        //Visa notis att order lagts till - gör en funktion för det
+        //Visa notis att order lagts till?
         
-        //Nollställ order amount
-        let newOrderAmount = document.getElementById("new-order-amount");
-        newOrderAmount.innerText = "Nuvarande beställning(0kr)";
     }else{
         basketError("Lägg till varor i order för att lägga beställning");
     }
@@ -530,11 +537,14 @@ function addToBasket(dish, i){
 
 
 function clearBasket(){
+    
     let basketDiv = document.getElementById("basket");
     basketDiv.innerHTML = "";
 
     let basketSum = document.getElementById("basketSum");
     basketSum.innerText = "Summa: 0";
+
+    resetNewOrderAmount();
 }
 
 //Visar sida för att skapa en ny order
