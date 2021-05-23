@@ -121,12 +121,13 @@ footer {
 
 /* ERROR MESSAGE */
 .errorMsg {
-  background-color: rgba(255, 187, 97, 0.767);
+  background-color: rgba(252, 207, 111, 0.815);
   color: #1d1d1d;
   border-radius: 0.5rem;
   padding: 2rem;
   font-size: 1.1rem;
   margin: 2rem;
+  margin-bottom: 10rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
