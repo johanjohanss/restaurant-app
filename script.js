@@ -382,6 +382,7 @@ function buildMenu(){
 
             if(dish.allergies.length != 0){
                 row.classList.add("allergy-warning");
+                allergies.classList.add("allergy-true");
             }
 
             row.appendChild(ingredientDiv);

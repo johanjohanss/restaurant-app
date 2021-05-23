@@ -53,13 +53,16 @@ footer {
 }
 
 .custom-box-special {
-  /*background-color: rgb(241, 241, 241);*/
   border-radius: 0.25rem;
   border: 2px solid #3f3f3f;
 }
 
 .allergy-warning {
   border: 1.5px solid rgba(255, 155, 115, 0.747);
+}
+
+.allergy-true {
+  font-weight: bold;
 }
 
 .symbol-div {
