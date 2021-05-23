@@ -111,6 +111,7 @@ window.addEventListener("load", function(){
 
 });
 
+//Tar bort en order
 function removeOrder(){
     console.log("remove order");
     //Kollar igenom orders array och tar bort element som matchar currentOrder
@@ -123,9 +124,12 @@ function removeOrder(){
     showStartPage();
 }
 
+//Återställer special order text
 function resetSpecialOrderText(){
     specialOrderBox.value = "";
 }
+
+//Återställer text för nuvarande beställning
 function resetNewOrderAmount(){
     let newOrderAmount = document.getElementById("new-order-amount");
     newOrderAmount.innerText = "Nuvarande beställning(0kr)";
@@ -164,17 +168,21 @@ function finishOrder(){
 
 }
 
+//Visar error i varukorg
 function basketError(s){
     let basketErrorText = document.getElementById("basketErrorText");
     basketErrorText.classList.remove("d-none");
     basketErrorText.innerText = s;
 }
+
+//Döljer error i varukorg
 function hideBasketError(){
     let basketErrorText = document.getElementById("basketErrorText");
     basketErrorText.classList.add("d-none");
     basketErrorText.innerText = "";
 }
 
+//Uppdaterar display av orders
 function updateOrders(){
 
     let orderDisplay = document.getElementById("orders");
@@ -228,27 +236,6 @@ function updateOrders(){
         orderDisplay.appendChild(row);
     });
 }
-
-//Struktur för order
-/*
-    <div class="row custom-box m-3 box-shadow pb-1">
-        <div class="col-12 p-3">
-            <h5 class="font-weight-normal">Beställning 1</h5>
-        </div>
-        <div class="col-8">
-            <p>Summa: 250kr</p>
-        </div>
-
-        <div class="col-4">
-            <svg class="symbol minus float-right" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16">
-                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/>
-            </svg>
-            <svg class="symbol info float-right mr-2" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-info-square-fill" viewBox="0 0 16 16">
-                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.93 4.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-            </svg>
-        </div>
-    </div>
-*/
 
 //Funktion som visar kvitto. Ska visa upp alla saker i ordern + summa
 function showOrderInformation(order){
@@ -331,7 +318,6 @@ function buildMenu(){
     
     //För varje maträtt i menu arrayen
     menu.forEach((dish) => {
-        //console.log(dish.name);
 
         //Fixar rubriker för varje kategori och ser till att varje kategori bara skrivs en gång
         if(currentCategory != dish.category){
@@ -358,7 +344,7 @@ function buildMenu(){
 
         row.appendChild(titleDiv);
 
-        //Om kategori är såser eller drycker begöver vi ej skriva ut ingredienser och allergier?
+        //Om kategori är såser eller drycker begöver vi ej skriva ut ingredienser och allergier
         if(dish.category != "Såser" && dish.category != "Drycker"){
             let ingredientDiv = document.createElement("div");
             ingredientDiv.classList.add("col-12");
@@ -413,29 +399,6 @@ function buildMenu(){
         row.appendChild(plusDiv);
         menuDiv.appendChild(row);
     });
-
-    //Koden ovan byggs upp efter denna struktur:
-    /* 
-            <div class="row custom-box m-3 box-shadow">
-                <div class="col-12 p-3">
-                    <h5 class="font-weight-normal">Maträtt</h5>
-                </div>
-                <div class="col-12">
-                    <p>Beskrivning</p>
-                </div>
-                <div class="col-12">
-                    <p>Allegier: </p>
-                </div>
-                <div class="col-10">
-                    <p>Pris: 250kr</p>
-                </div>
-                <div class="col-2">
-                    <svg class="symbol plus float-right" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16">
-                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/>
-                    </svg>
-                </div>
-            </div>
-    */
 }
 
 //Funktion som lägger till en maträtt till varukorgen
@@ -446,11 +409,11 @@ function addDishToBasket(dish){
             price: dish.price,   
         }
     );
-    console.log(basket);
     updateBasket();
     hideBasketError();
 }
 
+//Funktion som sätter specialOrder variabel till värdet från specialbeställningsrutan
 function registerSpecialOrder(){
     specialOrder = {
         specialOrder: specialOrderBox.value
@@ -535,7 +498,7 @@ function addToBasket(dish, i){
     updateBasket();
 }
 
-
+//Rensar varukorgen
 function clearBasket(){
     
     let basketDiv = document.getElementById("basket");
@@ -561,6 +524,7 @@ function showCurrentOrderPage(){
     showPage(currentOrderPage);
 }
 
+//Visa sida för orderinfo
 function showOrderInfoPage(){
     console.log("showing order info page");
     hidePage(startPage);
