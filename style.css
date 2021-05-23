@@ -54,13 +54,24 @@ footer {
 
 .custom-box-special {
   /*background-color: rgb(241, 241, 241);*/
-  padding: 2rem;
   border-radius: 0.25rem;
-  border: 2px solid #fff27b;
+  border: 2px solid #3f3f3f;
 }
 
 .allergy-warning {
   border: 1.5px solid rgba(255, 155, 115, 0.747);
+}
+
+.symbol-div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
 }
 
 .custom-border-lt {

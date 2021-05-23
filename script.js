@@ -117,6 +117,10 @@ function removeOrder(){
     showStartPage();
 }
 
+function resetSpecialOrderText(){
+    specialOrderBox.value = "";
+}
+
 //Gör klart en order ochlägger till order i orders array
 function finishOrder(){
 
@@ -140,6 +144,7 @@ function finishOrder(){
         updateOrders();
         showStartPage();
         clearBasket();
+        resetSpecialOrderText();
 
         //Visa notis att order lagts till - gör en funktion för det
         
@@ -476,7 +481,7 @@ function updateBasket(){
         row.appendChild(titleDiv);
 
         let priceDiv = document.createElement("div");
-        priceDiv.classList.add("col-8");
+        priceDiv.classList.add("col-7");
         let price = document.createElement("p");
         price.innerText = dish.price + "kr";
         priceDiv.appendChild(price);
@@ -492,7 +497,7 @@ function updateBasket(){
             addToBasket(dish, i);
         })
 
-        symbolDiv.classList.add("col-4");
+        symbolDiv.classList.add("col-5", "symbol-div");
         minusDiv.innerHTML = '<svg class="symbol minus float-right" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/></svg>'
         plusDiv.innerHTML += '<svg class="symbol plus float-right mx-1" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/></svg>'
         symbolDiv.appendChild(minusDiv);
