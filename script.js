@@ -86,8 +86,8 @@ window.addEventListener("load", function(){
     let backArrow = document.getElementById("back-arrow");
     backArrow.addEventListener("click", showStartPage);
 
-    let basketIcon = document.getElementById("basket-icon");
-    basketIcon.addEventListener("click", showCurrentOrderPage);
+    let newOrderFooter = document.getElementById("new-order-footer");
+    newOrderFooter.addEventListener("click", showCurrentOrderPage);
 
     let basketBackArrow = document.getElementById("basket-back-arrow");
     basketBackArrow.addEventListener("click", showNewOrderPage);
