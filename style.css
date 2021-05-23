@@ -59,6 +59,10 @@ footer {
   border: 2px solid #fff27b;
 }
 
+.allergy-warning {
+  border: 1.5px solid rgba(255, 155, 115, 0.747);
+}
+
 .custom-border-lt {
   border-top: 1.5px solid #313131;
   border-left: 1.5px solid #313131;

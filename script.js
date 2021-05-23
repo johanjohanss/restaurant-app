@@ -4,20 +4,52 @@
 
 //Menyarray - allt som läggs till genereras automatiskt till html i buildMenu funktionen
 const menu = [
-    {name:"Margherita", ingredients:["Tomatsås", "Ost"], allergies:[""], price:65, category: "Pizzor klass 1"},
-    {name:"Vesuvio", ingredients:["Tomatsås", "Ost", "Skinka"], allergies:[""], price:65, category: "Pizzor klass 1" },
-    {name:"Altono", ingredients:["Tomatsås", "Ost", "Tonfisk"], allergies:[""], price:65, category: "Pizzor klass 1" },  
+    //Pizzor klass 1
+    {name:"Margherita", ingredients:["Tomatsås", "Ost"], allergies:[], price:65, category: "Pizzor klass 1"},
+    {name:"Vesuvio", ingredients:["Tomatsås", "Ost", "Skinka"], allergies:[], price:65, category: "Pizzor klass 1" },
+    {name:"Altono", ingredients:["Tomatsås", "Ost", "Tonfisk"], allergies:[], price:65, category: "Pizzor klass 1" },  
 
-    {name:"Calzone", ingredients:["Tomatsås", "Ost", "Skinka"], allergies:[""], price:80, category: "Pizzor klass 2" }, 
-    {name:"Capricciosa", ingredients:["Tomatsås", "Ost", "Skinka", "Champinjoner"], allergies:[""], price:70, category: "Pizzor klass 2" }, 
-    {name:"Tomaso", ingredients:["Tomatsås", "Ost", "Tonfisk", "Räkor"], allergies:["Räkor"], price:70, category: "Pizzor klass 2" }, 
-
+    //Pizzor klass 2
+    {name:"Calzone", ingredients:["Tomatsås", "Ost", "Skinka"], allergies:[], price:80, category: "Pizzor klass 2" }, 
+    {name:"Capricciosa", ingredients:["Tomatsås", "Ost", "Skinka", "Champinjoner"], allergies:[], price:70, category: "Pizzor klass 2" }, 
+    {name:"Tomaso", ingredients:["Tomatsås", "Ost", "Tonfisk", "Räkor"], allergies:["Räkor"], price:70, category: "Pizzor klass 2" },
+    {name:"Hawaii", ingredients:["Tomatsås", "Ost", "Tonfisk", "Ananas"], allergies:[], price:70, category: "Pizzor klass 2" }, 
+    {name:"Oriental", ingredients:["Tomatsås", "Ost", "Tonfisk", "Köttfärs"], allergies:[], price:70, category: "Pizzor klass 2" }, 
+    {name:"Venezia", ingredients:["Tomatsås", "Ost", "Skinka", "Tonfisk"], allergies:[], price:70, category: "Pizzor klass 2" },
+    {name:"Bolognese", ingredients:["Tomatsås", "Ost", "Köttfärs", "Lök"], allergies:[], price:70, category: "Pizzor klass 2" },
+    {name:"Venezia", ingredients:["Tomatsås", "Ost", "Räkor", "Champinjoner"], allergies:[], price:70, category: "Pizzor klass 2" }, 
+    
+    //Pizzor klass 3
     {name:"Bravo", ingredients:["Tomatsås", "Ost", "Skinka", "Bacon", "Lök", "Ägg"], allergies:["Ägg"], price:75, category: "Pizzor klass 3" }, 
     {name:"Princessa", ingredients:["Tomatsås", "Ost", "Skinka", "Räkor", "Champinjoner"], allergies:["Räkor"], price:75, category: "Pizzor klass 3" }, 
+    {name:"Kroppkarr", ingredients:["Tomatsås", "Ost", "Skinka", "Köttfärs", "Champinjoner"], allergies:[], price:75, category: "Pizzor klass 3" },
+    {name:"Afrikano", ingredients:["Tomatsås", "Ost", "Skinka", "Ananas", "Curry", "Banan"], allergies:[], price:75, category: "Pizzor klass 3" },
+    {name:"Önska", ingredients:["Tomatsås", "Ost", "Skinka", "Räkor", "Champinjoner"], allergies:["Räkor"], price:85, category: "Pizzor klass 3" },
+    {name:"Lambada", ingredients:["Tomatsås", "Ost", "Skinka", "Köttfärs", "Räkor"], allergies:["Räkor"], price:75, category: "Pizzor klass 3" },
+    {name:"Alsterdalen", ingredients:["Tomatsås", "Ost", "Skinka", "Crabfish", "Räkor"], allergies:["Räkor"], price:75, category: "Pizzor klass 3" },
+    {name:"Paradis", ingredients:["Tomatsås", "Ost", "Skinka", "Räkor", "Ananas"], allergies:["Räkor"], price:75, category: "Pizzor klass 3" },
+    {name:"Roma", ingredients:["Tomatsås", "Ost", "Skinka", "Kantareller", "Tomat(färska)"], allergies:[], price:75, category: "Pizzor klass 3" },
+    {name:"Banjogatan", ingredients:["Tomatsås", "Ost", "Skinka", "Salami", "Paprika"], allergies:[], price:75, category: "Pizzor klass 3" },
+    {name:"Rimini", ingredients:["Tomatsås", "Ost", "Köttfärs", "Gorgonzolaost", "Lök"], allergies:[], price:75, category: "Pizzor klass 3" },
+    {name:"Opera", ingredients:["Tomatsås", "Ost", "Köttfärs", "Ananas", "Curry", "Banan"], allergies:[], price:75, category: "Pizzor klass 3" },
+    {name:"Mesopotamia", ingredients:["Tomatsås", "Ost", "Salami", "Köttfärs", "Nötter"], allergies:["Nötter"], price:75, category: "Pizzor klass 3" },
 
+    //Såser
     {name:"Bearnaisesås 10 cl", ingredients:[], allergies:[], price:10, category: "Såser" }, 
+    {name:"Kebabsås mild 10 cl", ingredients:[], allergies:[], price:10, category: "Såser" },
+    {name:"Kebabsås stark 10 cl", ingredients:[], allergies:[], price:10, category: "Såser" },
+    {name:"Kebabsås blandad 10 cl", ingredients:[], allergies:[], price:10, category: "Såser" },
+    {name:"Tzatzikisås 10 cl", ingredients:[], allergies:[], price:10, category: "Såser" },
+    {name:"Vitlökssås 10 cl", ingredients:[], allergies:[], price:10, category: "Såser" },
 
+    //Drycker
     {name:"Coca-Cola 33 cl", ingredients:[], allergies:[], price:15, category: "Drycker" }, 
+    {name:"Coca-Cola light 33 cl", ingredients:[], allergies:[], price:15, category: "Drycker" },
+    {name:"Fanta 33 cl", ingredients:[], allergies:[], price:15, category: "Drycker" },
+    {name:"Sprite 33 cl", ingredients:[], allergies:[], price:15, category: "Drycker" },
+    {name:"Mineralvatten 33 cl", ingredients:[], allergies:[], price:15, category: "Drycker" },
+    {name:"Coca-Cola 50 cl", ingredients:[], allergies:[], price:20, category: "Drycker" },
+    {name:"Fanta 50 cl", ingredients:[], allergies:[], price:20, category: "Drycker" },
 ]
 
 //Varukorg-array - lagrar alla produkter som ligger i varukorgen
@@ -342,6 +374,10 @@ function buildMenu(){
                     allergies.innerText += allergy;
                 }
             });
+
+            if(dish.allergies.length != 0){
+                row.classList.add("allergy-warning");
+            }
 
             row.appendChild(ingredientDiv);
             row.appendChild(allergiesDiv);
