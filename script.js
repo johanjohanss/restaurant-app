@@ -175,7 +175,7 @@ function updateOrders(){
         symbolDiv.classList.add("col-4");
         minusDiv.innerHTML = '<svg class="symbol minus float-right" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/></svg>'
         infoDiv.innerHTML += '<svg class="symbol info float-right mr-2" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-info-square-fill" viewBox="0 0 16 16"><path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.93 4.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>'
-        symbolDiv.appendChild(minusDiv);
+        //symbolDiv.appendChild(minusDiv);
         symbolDiv.appendChild(infoDiv);
 
         row.appendChild(titleDiv);
@@ -225,12 +225,13 @@ function showOrderInformation(order){
 
         //Bygg upp div
         let row = document.createElement("div");
-        row.classList.add("row", "custom-box", "m-3", "box-shadow");
-
+        
         //Uppdatera summa - kollar så att inte det är specialOrder
         if(dish.price != null){
             sum += dish.price;
             productAmount += 1;
+
+            row.classList.add("row", "custom-box", "m-3", "box-shadow");
 
             let titleDiv = document.createElement("div");
             titleDiv.classList.add("col-12", "p-3");
@@ -249,6 +250,9 @@ function showOrderInformation(order){
     
             row.appendChild(priceDiv);
         }else{
+
+            row.classList.add("row", "custom-box-special", "m-3", "box-shadow");
+
             let titleDiv = document.createElement("div");
             titleDiv.classList.add("col-12", "p-3");
             let title = document.createElement("h5");
@@ -440,14 +444,27 @@ function updateBasket(){
         let price = document.createElement("p");
         price.innerText = dish.price + "kr";
         priceDiv.appendChild(price);
-
+    
+        let symbolDiv = document.createElement("div");
+        let minusDiv = document.createElement("div");
         let plusDiv = document.createElement("div");
-        plusDiv.classList.add("col-4");
-        plusDiv.innerHTML = '<svg class="symbol minus float-right mx-1" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/></svg>';
-        plusDiv.innerHTML += '<svg class="symbol plus float-right mx-1" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/></svg>'
         
+        minusDiv.addEventListener("click", function(){
+            removeFromBasket(i);
+        })
+        plusDiv.addEventListener("click", function(){
+            addToBasket(dish, i);
+        })
+
+        symbolDiv.classList.add("col-4");
+        minusDiv.innerHTML = '<svg class="symbol minus float-right" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-dash-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm2.5 7.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1z"/></svg>'
+        plusDiv.innerHTML += '<svg class="symbol plus float-right mx-1" xmlns="http://www.w3.org/2000/svg" width="2.3rem" fill="currentColor" class="bi bi-plus-square-fill" viewBox="0 0 16 16"><path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"/></svg>'
+        symbolDiv.appendChild(minusDiv);
+        symbolDiv.appendChild(plusDiv);
+
+
         row.appendChild(priceDiv);
-        row.appendChild(plusDiv);
+        row.appendChild(symbolDiv);
 
         basketDiv.appendChild(row);
     });
@@ -456,6 +473,19 @@ function updateBasket(){
     basketSum.innerText = "Summa för " + productAmount + " produkter: " + sum + "kr";
     newOrderAmount.innerText = "Nuvarande beställning("+sum+"kr)";
 }
+
+//Tar bort en maträtt från varukorgen
+function removeFromBasket(i){
+    basket.splice(i, 1);
+    updateBasket();
+}
+
+//Funktion som lägger till maträtt som skickas in till varukorgen (läggs till på det index som skickas in)
+function addToBasket(dish, i){
+    basket.splice(i, 0, dish);
+    updateBasket();
+}
+
 
 function clearBasket(){
     let basketDiv = document.getElementById("basket");

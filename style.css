@@ -52,6 +52,13 @@ footer {
   border-radius: 0.25rem;
 }
 
+.custom-box-special {
+  /*background-color: rgb(241, 241, 241);*/
+  padding: 2rem;
+  border-radius: 0.25rem;
+  border: 2px solid #fff27b;
+}
+
 .custom-border-lt {
   border-top: 1.5px solid #313131;
   border-left: 1.5px solid #313131;
